@@ -4,20 +4,32 @@ pipeline {
     }
     tools {
         jdk 'Java17'
-        maven 'Maven3'
+        maven 'Maven3' // Ensure 'Maven3' matches the name in your Jenkins configuration
     }
-
     stages {
         stage("Cleanup Workspace") {
             steps {
-                cleanWs()
+                cleanWs() // Ensure this step is invoked with parentheses
             }
         }
 
         stage("Checkout from SCM") {
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/elnady1bs/complete-prodcution-e2e-pipeline'
+                git branch: 'main', url: 'https://github.com/elnady1bs/complete-prodcution-e2e-pipeline'
             }
+        }
+                stage("Build Application"){
+            steps {
+                sh "mvn clean package"
+            }
+
+        }
+
+        stage("Test Application"){
+            steps {
+                sh "mvn test"
+            }
+
         }
     }
 }
