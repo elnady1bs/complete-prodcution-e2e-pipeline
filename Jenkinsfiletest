@@ -1,0 +1,19 @@
+pipeline {
+    agent {
+        label "jenkins-agent"
+    }
+    tools {
+        jdk 'Java17'
+        maven 'maven3'
+    }
+    stages{
+        stage("A"){
+            steps{
+                echo "=========excuting A======"
+            }
+
+
+        }
+
+
+    }
