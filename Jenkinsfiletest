@@ -4,12 +4,12 @@ pipeline {
     }
     tools {
         jdk 'Java17'
-        maven 'Maven3' // Ensure 'Maven3' matches your Jenkins Maven installation name
+        maven 'Maven3' // Ensure 'Maven3' matches the name in your Jenkins configuration
     }
     stages {
         stage("Cleanup Workspace") {
             steps {
-                cleanWs() // Add parentheses to correctly invoke the cleanWs step
+                cleanWs() // Ensure this step is invoked with parentheses
             }
         }
 
