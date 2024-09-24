@@ -18,7 +18,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/elnady1bs/complete-prodcution-e2e-pipeline'
             }
         }
-                stage("Build Application"){
+        stage("Build Application"){
             steps {
                 sh "mvn clean package"
             }
@@ -28,6 +28,16 @@ pipeline {
         stage("Test Application"){
             steps {
                 sh "mvn test"
+            }
+
+        }
+        stage("Sonarqube Analysis") {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+                        sh "mvn sonar:sonar"
+                    }
+                }
             }
 
         }
